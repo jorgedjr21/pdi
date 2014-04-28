@@ -13,13 +13,42 @@ public class ControlarImagem {
     private BufferedImage imagemDada;
 
     //*******************************************************************************************
-    public ControlarImagem(String nomeArquivoImagemDada,
-            Graphics desenho) {
+    public ControlarImagem(String nomeArquivoImagemDada, Graphics desenho) {
         imagemDada = lerImagem(nomeArquivoImagemDada);
         if (imagemDada != null) {
             mostrarImagemBuffer(imagemDada, desenho);
             criarImagemCinza(imagemDada);
         }
+    }
+
+    public char[][] rotacionarImagem(float angulo) {
+        char[][] imagemRotacionada = null;
+        char[][] imagemOriginal = getImagemCinza();
+        if (angulo == 90.0) {
+            imagemRotacionada = transposta(imagemOriginal);
+        }
+        return imagemRotacionada;
+    }
+
+    private char[][] transposta(char[][] imagem) {
+        int nCol = this.getNCol();
+        int nLin = this.getNLin();
+        char aux;
+        char[][] transposta = new char[nCol][nLin];
+        System.out.println(nCol + " " + nLin);
+        for (int i = 0; i < nLin; i++) {
+            for (int j = i + 1; j < nCol; j++) {
+                if (j != i) {
+                    aux = imagem[i][j];
+                    imagem[i][j] = imagem[j][i];
+                    imagem[j][i] = aux;
+                }
+               // System.out.println(i+ " "+ j+"-"+j+" "+i);
+            }
+        }
+        //this.setnColImagem(nLin);
+        //this.setnLinImagem(nCol);
+        return imagem;
     }
 
     //*******************************************************************************************
@@ -30,8 +59,8 @@ public class ControlarImagem {
         char valorSaida;
 
         // DIMENSOES DA MATRIZ CINZA
-        nColImagem = imagem.getWidth(null);
-        nLinImagem = imagem.getHeight(null);
+        setnColImagem(imagem.getWidth(null));
+        setnLinImagem(imagem.getHeight(null));
         imagemCinza = new char[nColImagem][nLinImagem];
 
         // DEFININDO IMAGENS INTERMEDIARIAS
@@ -186,4 +215,18 @@ public class ControlarImagem {
         return (nColImagem);
     }
     //*******************************************************************************************
+
+    /**
+     * @param nLinImagem the nLinImagem to set
+     */
+    public void setnLinImagem(int nLinImagem) {
+        this.nLinImagem = nLinImagem;
+    }
+
+    /**
+     * @param nColImagem the nColImagem to set
+     */
+    public void setnColImagem(int nColImagem) {
+        this.nColImagem = nColImagem;
+    }
 }

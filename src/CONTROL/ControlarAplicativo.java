@@ -48,7 +48,7 @@ public class ControlarAplicativo implements ActionListener {
 
             // LE IMAGEM SOLICITADA
             nomeArquivoImagemDada = pnCenario.escolherArquivo(1);
-
+            pnCenario.limpaPainelCen(desenhoCen);
             if (nomeArquivoImagemDada != null) {
                 controleImagem = new ControlarImagem(nomeArquivoImagemDada, desenhoCen);
                 estadoDesenho = true;
@@ -73,6 +73,7 @@ public class ControlarAplicativo implements ActionListener {
         if (comando.equals("botaoAcao1")) {
             float angulo = Float.parseFloat(JOptionPane.showInputDialog("Informe o Ângulo desejado:"));
             JOptionPane.showMessageDialog(null, String.valueOf(angulo));
+            imagemAtual = controleImagem.rotacionarImagem(angulo);
         }
 
         if (comando.equals("botaoAcao11")) {
