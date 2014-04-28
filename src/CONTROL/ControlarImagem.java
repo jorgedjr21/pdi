@@ -27,28 +27,25 @@ public class ControlarImagem {
         if (angulo == 90.0) {
             imagemRotacionada = transposta(imagemOriginal);
         }
+        imagemCinza = imagemRotacionada;
         return imagemRotacionada;
     }
 
     private char[][] transposta(char[][] imagem) {
-        int nCol = this.getNCol();
-        int nLin = this.getNLin();
-        char aux;
+        int nLin, nCol;
+        nLin = imagem.length;
+        nCol = imagem[0].length;
+
         char[][] transposta = new char[nCol][nLin];
-        System.out.println(nCol + " " + nLin);
+
         for (int i = 0; i < nLin; i++) {
-            for (int j = i + 1; j < nCol; j++) {
-                if (j != i) {
-                    aux = imagem[i][j];
-                    imagem[i][j] = imagem[j][i];
-                    imagem[j][i] = aux;
-                }
-               // System.out.println(i+ " "+ j+"-"+j+" "+i);
+            for (int j = 0; j < nCol; j++) {
+                transposta[j][i] = imagem[i][j];
             }
         }
-        //this.setnColImagem(nLin);
-        //this.setnLinImagem(nCol);
-        return imagem;
+        setnColImagem(nLin);
+        setnLinImagem(nCol);
+        return transposta;
     }
 
     //*******************************************************************************************
@@ -147,10 +144,7 @@ public class ControlarImagem {
 
     //*******************************************************************************************
     // MOSTRAR IMAGEM DO TIPO MATRIZ DE BYTES
-    public void mostrarImagemMatriz(char[][] imagemM,
-            int nLin,
-            int nCol,
-            Graphics desenho) {
+    public void mostrarImagemMatriz(char[][] imagemM, int nLin, int nCol, Graphics desenho) {
         BufferedImage imagemB;
 
         imagemB = transformarMatriz2Buffer(imagemM, nLin, nCol);
@@ -158,9 +152,7 @@ public class ControlarImagem {
     }
 
     //*******************************************************************************************
-    private BufferedImage transformarMatriz2Buffer(char[][] imagemM,
-            int nLin,
-            int nCol) {
+    private BufferedImage transformarMatriz2Buffer(char[][] imagemM, int nLin, int nCol) {
         int x, y;
         char valorSaida;
         WritableRaster imagemRasterSaida;
