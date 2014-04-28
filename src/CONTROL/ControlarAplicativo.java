@@ -2,6 +2,7 @@ package pacoteBase.CONTROL;
 
 	import java.awt.*;
 	import java.awt.event.*;
+import javax.swing.JOptionPane;
 	import pacoteBase.VIEW.*;
 
 public class ControlarAplicativo implements ActionListener {
@@ -51,6 +52,7 @@ public class ControlarAplicativo implements ActionListener {
 
 			// LE IMAGEM SOLICITADA
 			nomeArquivoImagemDada = pnCenario.escolherArquivo ( 1 );
+          
 			if ( nomeArquivoImagemDada != null ) {
 				controleImagem = new ControlarImagem( nomeArquivoImagemDada, desenhoCen );
 				estadoDesenho  = true;
@@ -73,7 +75,8 @@ public class ControlarAplicativo implements ActionListener {
 		}
 
 		if ( comando.equals( "botaoAcao1" ) )  {
-
+                    float angulo =  Float.parseFloat(JOptionPane.showInputDialog("Informe o Ângulo desejado:"));
+                    JOptionPane.showMessageDialog(null,String.valueOf(angulo));
 		} 
 
 		if ( comando.equals( "botaoAcao11" ) ) {
