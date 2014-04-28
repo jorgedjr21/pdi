@@ -1,4 +1,4 @@
-package pacoteBase.CONTROL;
+package CONTROL;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -14,8 +14,7 @@ public class ControlarImagem {
 
     //*******************************************************************************************
     public ControlarImagem(String nomeArquivoImagemDada,
-            Graphics desenho
-    ) {
+            Graphics desenho) {
         imagemDada = lerImagem(nomeArquivoImagemDada);
         if (imagemDada != null) {
             mostrarImagemBuffer(imagemDada, desenho);
@@ -61,7 +60,7 @@ public class ControlarImagem {
     }
 
     //******************************************************************************************
-    public char[][] copiarImagem(char[][] imagemC,int nLinImg,int nColImg) {
+    public char[][] copiarImagem(char[][] imagemC, int nLinImg, int nColImg) {
         int x, y;
         char[][] imagemR;
 
@@ -97,7 +96,7 @@ public class ControlarImagem {
 
     //*******************************************************************************************
     // MOSTRAR IMAGEM BUFERIZADA
-    public void mostrarImagemBuffer(BufferedImage imagem,Graphics desenho) {
+    public void mostrarImagemBuffer(BufferedImage imagem, Graphics desenho) {
         int imageWidth, imageHeight, x, sx, y, sy, cell, dx, dy;
         int cells[] = {0, 1, 2, 3};
 
@@ -122,8 +121,7 @@ public class ControlarImagem {
     public void mostrarImagemMatriz(char[][] imagemM,
             int nLin,
             int nCol,
-            Graphics desenho
-    ) {
+            Graphics desenho) {
         BufferedImage imagemB;
 
         imagemB = transformarMatriz2Buffer(imagemM, nLin, nCol);
@@ -133,8 +131,7 @@ public class ControlarImagem {
     //*******************************************************************************************
     private BufferedImage transformarMatriz2Buffer(char[][] imagemM,
             int nLin,
-            int nCol
-    ) {
+            int nCol) {
         int x, y;
         char valorSaida;
         WritableRaster imagemRasterSaida;
@@ -157,8 +154,7 @@ public class ControlarImagem {
     public void gravarImagem(String nomeArquivo,
             char[][] imagemM,
             int nLin,
-            int nCol
-    ) {
+            int nCol) {
         File arquivoImagem;
         BufferedImage imagemB;
 
@@ -189,6 +185,5 @@ public class ControlarImagem {
     public int getNCol() {
         return (nColImagem);
     }
-
-	//*******************************************************************************************
+    //*******************************************************************************************
 }

@@ -6,18 +6,15 @@
  * ORIENTADOS PELO PROF. EDISON O JESUS
      
  */
+package CONTROL;
 
-package pacoteBase.CONTROL;
-
-	import pacoteBase.CONTROL.ControlarAplicativo;
+import CONTROL.ControlarAplicativo;
 
 public class IniciarAplicativo {
 
-	//************************************************************************************************
-	public static void main(String[] args)
-	{
-		new ControlarAplicativo(  );
-	}
-
-	//************************************************************************************************
+    //************************************************************************************************
+    public static void main(String[] args) {
+        new ControlarAplicativo();
+    }
+    //************************************************************************************************
 }
