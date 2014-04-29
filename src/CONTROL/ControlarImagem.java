@@ -44,7 +44,7 @@ public class ControlarImagem {
             imagemRotacionada = antiHorario(imagemRotacionada);
         }
         if(angulo % 90 != 0){
-            this.rotacionar(angulo, imagemCinza);
+            imagemRotacionada = rotacionar(angulo, imagemCinza);
         }
         imagemCinza = imagemRotacionada;
         return imagemRotacionada;
@@ -84,9 +84,11 @@ public class ControlarImagem {
         return transposta;
     }
   /*ROTACIONAR EM UM ANGULO QUALQUER
-    Problema ao calcular novo_x, novo_y (valores negativos)
+    Rotação acontecendo, mas com problemas:
+    *Preenchimento preto devido a criação da imagem com tamanho [diagonal][diagonal]
+    *Pontinhos pretos (acho que aqui tem q fazer a interpolação do vizinho mais próximo);
     */
-    private void rotacionar(float angulo, char[][] imagem) {
+    private char[][] rotacionar(float angulo, char[][] imagem) {
         int nLin, nCol;
         nLin = imagem.length;
         nCol = imagem[0].length;
@@ -94,14 +96,15 @@ public class ControlarImagem {
         //nLin altura = y, nCol=x
        diagonal = (int)Math.round(sqrt((nLin*nLin)+(nCol*nCol)));
        char[][] rotacionada = new char[diagonal][diagonal];
-        for (int y = 0; y < diagonal; y++) {
-            for (int x = 0; x < diagonal; x++) {
-                novo_x = (int) Math.round(x * cos(angulo) - y * sin(angulo));
-                novo_y = (int) Math.round(x * sin(angulo) + y * cos(angulo));
-                System.out.print("["+novo_x+","+novo_y+"]");
+        for (int y = 0; y < nCol; y++) {
+            for (int x = 0; x < nLin; x++) {
+                novo_x = (int) Math.abs(Math.round(x * cos(angulo) - y * sin(angulo)));
+                novo_y = (int) Math.abs(Math.round(x * sin(angulo) + y * cos(angulo)));
+                rotacionada[novo_x][novo_y] = imagem[x][y];
             }
-            System.out.print("\n");
+            //System.out.print("\n");
         }
+        return rotacionada;
     }
 
     //*******************************************************************************************
