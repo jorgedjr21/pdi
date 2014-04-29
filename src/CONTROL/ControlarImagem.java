@@ -3,6 +3,7 @@ package CONTROL;
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
+import static java.lang.StrictMath.*;
 import javax.imageio.ImageIO;
 
 public class ControlarImagem {
@@ -24,29 +25,64 @@ public class ControlarImagem {
     public char[][] rotacionarImagem(float angulo) {
         char[][] imagemRotacionada = null;
         char[][] imagemOriginal = getImagemCinza();
-        if (angulo == 90.0) {
-            imagemRotacionada = transposta(imagemOriginal);
+        /*ROTACIONAR 90º SENTIDO HORARIO */
+        if (angulo == 90.0 || angulo == -270.0) {
+            imagemRotacionada = horario(imagemOriginal);
         }
+        /*ROTACIONAR 90º SENTIDO ANTIHORARIO */
+        if (angulo == -90.0 || angulo == 270.0) {
+            imagemRotacionada = antiHorario(imagemOriginal);
+        }
+        /*ROTACIONAR 180º SENTIDO HORARIO */
+        if (angulo == 180) {
+            imagemRotacionada = horario(imagemOriginal);
+            imagemRotacionada = horario(imagemRotacionada);
+        }
+        /*ROTACIONAR 180º SENTIDO ANTI-HORARIO */
+        if (angulo == -180) {
+            imagemRotacionada = antiHorario(imagemOriginal);
+            imagemRotacionada = antiHorario(imagemRotacionada);
+        }
+
         imagemCinza = imagemRotacionada;
         return imagemRotacionada;
     }
 
-    private char[][] transposta(char[][] imagem) {
+    private char[][] horario(char[][] imagem) {
         int nLin, nCol;
         nLin = imagem.length;
         nCol = imagem[0].length;
-
+  
         char[][] transposta = new char[nCol][nLin];
 
         for (int i = 0; i < nLin; i++) {
             for (int j = 0; j < nCol; j++) {
-                transposta[j][i] = imagem[i][j];
+                transposta[nCol - 1 - j][i] = imagem[i][j];
             }
         }
         setnColImagem(nLin);
         setnLinImagem(nCol);
         return transposta;
     }
+
+    private char[][] antiHorario(char[][] imagem) {
+        int nLin, nCol;
+        nLin = imagem.length;
+        nCol = imagem[0].length;
+       
+        char[][] transposta = new char[nCol][nLin];
+
+        for (int i = 0; i < nLin; i++) {
+            for (int j = 0; j < nCol; j++) {
+                transposta[j][nLin - 1 - i] = imagem[i][j];
+            }
+        }
+        setnColImagem(nLin);
+        setnLinImagem(nCol);
+        return transposta;
+    }
+
+
 
     //*******************************************************************************************
     // METODO PARA GERAR A IMAGEM RASTER EM NIVEIS DE CINZA A PARTIR DA IMAGEM BUFERIZADA COLORIDA

@@ -72,7 +72,7 @@ public class ControlarAplicativo implements ActionListener {
 
         if (comando.equals("botaoAcao1")) {
             float angulo = Float.parseFloat(JOptionPane.showInputDialog("Informe o Ângulo desejado:"));
-            JOptionPane.showMessageDialog(null, String.valueOf(angulo));
+            //JOptionPane.showMessageDialog(null, String.valueOf(angulo));
             imagemCinza = controleImagem.rotacionarImagem(angulo);
             pnCenario.limpaPainelDir(desenhoDir);
             controleImagem.mostrarImagemMatriz(imagemCinza, imagemCinza[0].length, imagemCinza.length, desenhoDir);
