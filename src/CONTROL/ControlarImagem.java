@@ -43,7 +43,9 @@ public class ControlarImagem {
             imagemRotacionada = antiHorario(imagemOriginal);
             imagemRotacionada = antiHorario(imagemRotacionada);
         }
-
+        if(angulo % 90 != 0){
+            this.rotacionar(angulo, imagemCinza);
+        }
         imagemCinza = imagemRotacionada;
         return imagemRotacionada;
     }
@@ -52,7 +54,7 @@ public class ControlarImagem {
         int nLin, nCol;
         nLin = imagem.length;
         nCol = imagem[0].length;
-  
+
         char[][] transposta = new char[nCol][nLin];
 
         for (int i = 0; i < nLin; i++) {
@@ -69,7 +71,7 @@ public class ControlarImagem {
         int nLin, nCol;
         nLin = imagem.length;
         nCol = imagem[0].length;
-       
+
         char[][] transposta = new char[nCol][nLin];
 
         for (int i = 0; i < nLin; i++) {
@@ -81,8 +83,26 @@ public class ControlarImagem {
         setnLinImagem(nCol);
         return transposta;
     }
-
-
+  /*ROTACIONAR EM UM ANGULO QUALQUER
+    Problema ao calcular novo_x, novo_y (valores negativos)
+    */
+    private void rotacionar(float angulo, char[][] imagem) {
+        int nLin, nCol;
+        nLin = imagem.length;
+        nCol = imagem[0].length;
+        int novo_x, novo_y,diagonal;
+        //nLin altura = y, nCol=x
+       diagonal = (int)Math.round(sqrt((nLin*nLin)+(nCol*nCol)));
+       char[][] rotacionada = new char[diagonal][diagonal];
+        for (int y = 0; y < diagonal; y++) {
+            for (int x = 0; x < diagonal; x++) {
+                novo_x = (int) Math.round(x * cos(angulo) - y * sin(angulo));
+                novo_y = (int) Math.round(x * sin(angulo) + y * cos(angulo));
+                System.out.print("["+novo_x+","+novo_y+"]");
+            }
+            System.out.print("\n");
+        }
+    }
 
     //*******************************************************************************************
     // METODO PARA GERAR A IMAGEM RASTER EM NIVEIS DE CINZA A PARTIR DA IMAGEM BUFERIZADA COLORIDA
