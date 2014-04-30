@@ -43,7 +43,7 @@ public class ControlarImagem {
             imagemRotacionada = antiHorario(imagemOriginal);
             imagemRotacionada = antiHorario(imagemRotacionada);
         }
-        if(angulo % 90 != 0){
+        if (angulo % 90 != 0) {
             imagemRotacionada = rotacionar(angulo, imagemCinza);
         }
         imagemCinza = imagemRotacionada;
@@ -55,16 +55,16 @@ public class ControlarImagem {
         nLin = imagem.length;
         nCol = imagem[0].length;
 
-        char[][] transposta = new char[nCol][nLin];
+        char[][] rotacionada = new char[nCol][nLin];
 
         for (int i = 0; i < nLin; i++) {
             for (int j = 0; j < nCol; j++) {
-                transposta[nCol - 1 - j][i] = imagem[i][j];
+                rotacionada[nCol - 1 - j][i] = imagem[i][j];
             }
         }
         setnColImagem(nLin);
         setnLinImagem(nCol);
-        return transposta;
+        return rotacionada;
     }
 
     private char[][] antiHorario(char[][] imagem) {
@@ -72,37 +72,43 @@ public class ControlarImagem {
         nLin = imagem.length;
         nCol = imagem[0].length;
 
-        char[][] transposta = new char[nCol][nLin];
+        char[][] rotacionada = new char[nCol][nLin];
 
         for (int i = 0; i < nLin; i++) {
             for (int j = 0; j < nCol; j++) {
-                transposta[j][nLin - 1 - i] = imagem[i][j];
+                rotacionada[j][nLin - 1 - i] = imagem[i][j];
             }
         }
         setnColImagem(nLin);
         setnLinImagem(nCol);
-        return transposta;
+        return rotacionada;
     }
-  /*ROTACIONAR EM UM ANGULO QUALQUER
-    Rotação acontecendo, mas com problemas:
-    *Preenchimento preto devido a criação da imagem com tamanho [diagonal][diagonal]
-    *Pontinhos pretos (acho que aqui tem q fazer a interpolação do vizinho mais próximo);
-    */
+
+    /*ROTACIONAR EM UM ANGULO QUALQUER
+     */
     private char[][] rotacionar(float angulo, char[][] imagem) {
-        int nLin, nCol;
-        nLin = imagem.length;
-        nCol = imagem[0].length;
-        int novo_x, novo_y,diagonal;
-        //nLin altura = y, nCol=x
-       diagonal = (int)Math.round(sqrt((nLin*nLin)+(nCol*nCol)));
-       char[][] rotacionada = new char[diagonal][diagonal];
-        for (int y = 0; y < nCol; y++) {
-            for (int x = 0; x < nLin; x++) {
-                novo_x = (int) Math.abs(Math.round(x * cos(angulo) - y * sin(angulo)));
-                novo_y = (int) Math.abs(Math.round(x * sin(angulo) + y * cos(angulo)));
-                rotacionada[novo_x][novo_y] = imagem[x][y];
+        int largura, altura;
+        largura = imagem.length;
+        altura = imagem[0].length;
+
+        System.out.println("largura = " + largura + " altura = " + altura);
+        int r = (int) Math.round(sqrt((largura * largura) + (altura * altura)));
+        char[][] rotacionada = new char[r][r];
+
+        double sena, cosa;
+        angulo = angulo * -1;
+        sena = Math.sin(angulo * Math.PI / 180);
+        cosa = Math.cos(angulo * Math.PI / 180);
+
+        for (int yl = 0; yl < r; yl++) {
+            for (int xl = 0; xl < r; xl++) {
+                int x = (int) Math.round((xl - r / 2) * cosa + (yl - r / 2) * sena + altura / 2);
+                int y = (int) Math.round(-(xl - r / 2) * sena + (yl - r / 2) * cosa + largura / 2);
+//                System.out.println("x = " + x + " y = " + y);
+                if (x < altura && x >= 0 && y < largura && y >= 0) {
+                    rotacionada[yl][xl] = imagem[y][x];
+                }
             }
-            //System.out.print("\n");
         }
         return rotacionada;
     }

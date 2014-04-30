@@ -76,6 +76,9 @@ public class ControlarAplicativo implements ActionListener {
             imagemCinza = controleImagem.rotacionarImagem(angulo);
             pnCenario.limpaPainelDir(desenhoDir);
             controleImagem.mostrarImagemMatriz(imagemCinza, imagemCinza[0].length, imagemCinza.length, desenhoDir);
+            nLinImageAtual = imagemCinza[0].length;
+            nColImageAtual = imagemCinza.length;
+            imagemAtual = controleImagem.copiarImagem(imagemCinza, nLinImageAtual, nColImageAtual);
         }
 
         if (comando.equals("botaoAcao11")) {
