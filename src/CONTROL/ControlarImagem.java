@@ -5,6 +5,7 @@ import java.awt.image.*;
 import java.io.*;
 import static java.lang.StrictMath.*;
 import javax.imageio.ImageIO;
+import MODEL.FiltroGabor;
 
 public class ControlarImagem {
 
@@ -83,6 +84,32 @@ public class ControlarImagem {
     /*ROTACIONAR EM UM ANGULO QUALQUER
      */
     private char[][] rotacionar(float angulo, char[][] imagem) {
+        int largura, altura;
+        largura = imagem.length;
+        altura = imagem[0].length;
+
+        System.out.println("largura = " + largura + " altura = " + altura);
+        int r = (int) Math.round(sqrt((largura * largura) + (altura * altura)));
+        char[][] rotacionada = new char[r][r];
+
+        double sena, cosa;
+        angulo = angulo * -1;
+        sena = Math.sin(angulo * Math.PI / 180);
+        cosa = Math.cos(angulo * Math.PI / 180);
+
+        for (int yl = 0; yl < r; yl++) {
+            for (int xl = 0; xl < r; xl++) {
+                int x = (int) Math.round((xl - r / 2) * cosa + (yl - r / 2) * sena + altura / 2);
+                int y = (int) Math.round(-(xl - r / 2) * sena + (yl - r / 2) * cosa + largura / 2);
+                if (x < altura && x >= 0 && y < largura && y >= 0) {
+                    rotacionada[yl][xl] = imagem[y][x];
+                }
+            }
+        }
+        return rotacionada;
+    }
+
+    private char[][] aplicarFiltroGabor(float angulo, char[][] imagem) {
         int largura, altura;
         largura = imagem.length;
         altura = imagem[0].length;
