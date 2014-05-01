@@ -34,15 +34,11 @@ public class ControlarImagem {
             imagemRotacionada = antiHorario(imagemOriginal);
         }
         /*ROTACIONAR 180º SENTIDO HORARIO */
-        if (angulo == 180) {
+        if (angulo == 180 || angulo == -180) {
             imagemRotacionada = horario(imagemOriginal);
             imagemRotacionada = horario(imagemRotacionada);
         }
         /*ROTACIONAR 180º SENTIDO ANTI-HORARIO */
-        if (angulo == -180) {
-            imagemRotacionada = antiHorario(imagemOriginal);
-            imagemRotacionada = antiHorario(imagemRotacionada);
-        }
         if (angulo % 90 != 0) {
             imagemRotacionada = rotacionar(angulo, imagemCinza);
         }
@@ -104,7 +100,6 @@ public class ControlarImagem {
             for (int xl = 0; xl < r; xl++) {
                 int x = (int) Math.round((xl - r / 2) * cosa + (yl - r / 2) * sena + altura / 2);
                 int y = (int) Math.round(-(xl - r / 2) * sena + (yl - r / 2) * cosa + largura / 2);
-//                System.out.println("x = " + x + " y = " + y);
                 if (x < altura && x >= 0 && y < largura && y >= 0) {
                     rotacionada[yl][xl] = imagem[y][x];
                 }

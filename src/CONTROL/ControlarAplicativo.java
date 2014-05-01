@@ -122,13 +122,16 @@ public class ControlarAplicativo implements ActionListener {
         if (comando.equals("botaoReset") && estadoDesenho) {
             pnCenario.limpaPainelCen(desenhoCen);
             controleImagem = new ControlarImagem(nomeArquivoImagemDada, desenhoCen);
+            imagemCinza = controleImagem.getImagemCinza();
+            nLinImageInic = controleImagem.getNLin();
+            nColImageInic = controleImagem.getNCol();
+            
+            pnCenario.limpaPainelDir(desenhoDir);
+            controleImagem.mostrarImagemMatriz(imagemCinza, nLinImageInic, nColImageInic, desenhoDir);
+
             nLinImageAtual = nLinImageInic;
             nColImageAtual = nColImageInic;
             imagemAtual = controleImagem.copiarImagem(imagemCinza, nLinImageInic, nColImageInic);
-
-            pnCenario.limpaPainelDir(desenhoDir);
-            controleImagem.mostrarImagemMatriz(imagemAtual, nLinImageAtual, nColImageAtual, desenhoDir);
-
             pnCenario.ativarPainelAcao1();
             pnCenario.resetaSistema();
         }
