@@ -109,30 +109,36 @@ public class ControlarImagem {
         return rotacionada;
     }
 
-    private char[][] aplicarFiltroGabor(float angulo, char[][] imagem) {
-        int largura, altura;
-        largura = imagem.length;
-        altura = imagem[0].length;
+    public char[][] aplicarFiltroGabor(FiltroGabor filtro, char[][] imagem) {
+        int nLin, nCol;
+        nLin = imagem.length;
+        nCol = imagem[0].length;
 
-        System.out.println("largura = " + largura + " altura = " + altura);
-        int r = (int) Math.round(sqrt((largura * largura) + (altura * altura)));
-        char[][] rotacionada = new char[r][r];
+        char resultado[][] = new char[nLin][nCol];
+        double kernel[][] = filtro.getMatrizConvolucao();
+        int tamKernel = filtro.getTamKernel();
+        int ii, jj, nn, mm;
 
-        double sena, cosa;
-        angulo = angulo * -1;
-        sena = Math.sin(angulo * Math.PI / 180);
-        cosa = Math.cos(angulo * Math.PI / 180);
+        for (int i = 0; i < nLin; i++) {
+            for (int j = 0; j < nCol; j++) {
 
-        for (int yl = 0; yl < r; yl++) {
-            for (int xl = 0; xl < r; xl++) {
-                int x = (int) Math.round((xl - r / 2) * cosa + (yl - r / 2) * sena + altura / 2);
-                int y = (int) Math.round(-(xl - r / 2) * sena + (yl - r / 2) * cosa + largura / 2);
-                if (x < altura && x >= 0 && y < largura && y >= 0) {
-                    rotacionada[yl][xl] = imagem[y][x];
+                for (int m = 0; m < tamKernel; m++) {
+                    mm = tamKernel - 1 - m;
+                    for (int n = 0; n < tamKernel; n++) {
+                        nn = tamKernel - 1 - n;
+
+                        ii = i + (m - tamKernel);
+                        jj = j + (n - tamKernel);
+
+                        if (ii >= 0 && ii < nLin && jj >= 0 && jj < nCol) {
+                            resultado[i][j] += imagem[ii][jj] * kernel[mm][nn];
+                        }
+                    }
                 }
             }
         }
-        return rotacionada;
+
+        return resultado;
     }
 
     //*******************************************************************************************

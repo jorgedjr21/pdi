@@ -70,6 +70,12 @@ public class ControlarAplicativo implements ActionListener {
 
         if (comando.equals("botaoFiltroGabor")) {
             filtroGabor = new FiltroGabor(5, 3 * Math.PI / 4, 2, 2, 1, 0);
+            imagemCinza = controleImagem.aplicarFiltroGabor(filtroGabor, imagemCinza);
+            pnCenario.limpaPainelDir(desenhoDir);
+            controleImagem.mostrarImagemMatriz(imagemCinza, imagemCinza[0].length, imagemCinza.length, desenhoDir);
+            nLinImageAtual = imagemCinza[0].length;
+            nColImageAtual = imagemCinza.length;
+            imagemAtual = controleImagem.copiarImagem(imagemCinza, nLinImageAtual, nColImageAtual);
 
         }
 
