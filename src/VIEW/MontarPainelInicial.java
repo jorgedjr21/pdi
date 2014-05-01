@@ -103,8 +103,8 @@ public class MontarPainelInicial {
         // ADDING BUTTONS
         addAButton("New Image", "botaoImagem", buttonPanel, true, controlePrograma);
         btReset = addAButton("Reset", "botaoReset", buttonPanel, false, controlePrograma);
-        btAcao1 = addAButton("Rotacionar", "botaoAcao1", buttonPanel, false, controlePrograma);
-        btAcao3 = addAButton("Aplicar Filtro Gabor", "botaoAcao3", buttonPanel, false, controlePrograma);
+        btAcao1 = addAButton("Rotacionar", "botaoRotacionar", buttonPanel, false, controlePrograma);
+        btAcao3 = addAButton("Aplicar Filtro Gabor", "botaoFiltroGabor", buttonPanel, false, controlePrograma);
         btAcao4 = addAButton("Acao4", "botaoAcao4", buttonPanel, false, controlePrograma);
         btSalva = addAButton("Save", "botaoSalva", buttonPanel, false, controlePrograma);
         addAButton("END", "botaoFim", buttonPanel, true, controlePrograma);

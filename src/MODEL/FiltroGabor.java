@@ -21,7 +21,8 @@ public class FiltroGabor {
         this.lambda = lambda;
         this.gamma = gamma;
         this.offset = offset;
-        
+        matrizConvolucao = new double[tamKernel][tamKernel];
+
         double xl, yl, xz, yz;
         for (int x = 0; x < tamKernel; x++) {
             for (int y = 0; y < tamKernel; y++) {
@@ -32,11 +33,24 @@ public class FiltroGabor {
                 matrizConvolucao[x][y] = Math.exp(-(xz * xz + gamma * gamma * yz * yz) / (2 * sigma * sigma)) * Math.cos(2 * Math.PI * xz / lambda + offset);
             }
         }
+        double sum = 0, s2 = 0;
         for (int x = 0; x < tamKernel; x++) {
             for (int y = 0; y < tamKernel; y++) {
                 System.out.printf("%f ", matrizConvolucao[x][y]);
+                sum += matrizConvolucao[x][y];
             }
-            System.out.printf("\n)");
+            System.out.printf("\n");
         }
+        System.out.println("");
+        for (int x = 0; x < tamKernel; x++) {
+            for (int y = 0; y < tamKernel; y++) {
+                matrizConvolucao[x][y] /= sum;
+                System.out.printf("%f ", matrizConvolucao[x][y]);
+
+                s2 += matrizConvolucao[x][y];
+            }
+            System.out.printf("\n");
+        }
+        System.out.println("sum normalizada " + s2);
     }
 }

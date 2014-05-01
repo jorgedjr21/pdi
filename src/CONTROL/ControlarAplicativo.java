@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JOptionPane;
 import VIEW.*;
+import MODEL.FiltroGabor;
 
 public class ControlarAplicativo implements ActionListener {
 
@@ -16,6 +17,7 @@ public class ControlarAplicativo implements ActionListener {
     private int nLinImageAtual, nColImageAtual;
     private int nLinImageInic, nColImageInic;
     private boolean estadoDesenho;
+    private FiltroGabor filtroGabor;
 
     //*******************************************************************************************
     public ControlarAplicativo() {
@@ -66,11 +68,12 @@ public class ControlarAplicativo implements ActionListener {
             }
         }
 
-        if (comando.equals("botaoAcao3") && estadoDesenho) {
-            controlarAcao3();
+        if (comando.equals("botaoFiltroGabor")) {
+            filtroGabor = new FiltroGabor(5, 3 * Math.PI / 4, 2, 2, 1, 0);
+
         }
 
-        if (comando.equals("botaoAcao1")) {
+        if (comando.equals("botaoRotacionar")) {
             float angulo = Float.parseFloat(JOptionPane.showInputDialog("Informe o Ângulo desejado:"));
             //JOptionPane.showMessageDialog(null, String.valueOf(angulo));
             imagemCinza = controleImagem.rotacionarImagem(angulo);
@@ -125,7 +128,7 @@ public class ControlarAplicativo implements ActionListener {
             imagemCinza = controleImagem.getImagemCinza();
             nLinImageInic = controleImagem.getNLin();
             nColImageInic = controleImagem.getNCol();
-            
+
             pnCenario.limpaPainelDir(desenhoDir);
             controleImagem.mostrarImagemMatriz(imagemCinza, nLinImageInic, nColImageInic, desenhoDir);
 
