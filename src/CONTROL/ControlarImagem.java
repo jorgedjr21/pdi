@@ -137,7 +137,7 @@ public class ControlarImagem {
                 }
             }
         }
-
+        imagemCinza = resultado;
         return resultado;
     }
 
