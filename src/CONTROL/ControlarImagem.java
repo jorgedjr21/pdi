@@ -110,7 +110,7 @@ public class ControlarImagem {
     }
 
     public char[][] aplicarFiltroGabor(FiltroGabor filtro, char[][] imagem) {
-        int nLin, nCol;
+         int nLin, nCol;
         nLin = imagem.length;
         nCol = imagem[0].length;
 
