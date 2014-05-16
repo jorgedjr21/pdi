@@ -42,6 +42,16 @@ public class MontarPainelInicial {
     private JRadioButton btAcao41;
     private JRadioButton btAcao42;
     private ButtonGroup btRdAcao4;
+    private JLabel lbTheta;
+    private JLabel lbSigma;
+    private JLabel lbLambda;
+    private JLabel lbGamma;
+    private JLabel lbOffset;
+    private JTextField tfTheta;
+    private JTextField tfSigma;
+    private JTextField tfGamma;
+    private JTextField tfLambda;
+    private JTextField tfOffset;
     private Graphics desenhoCen;
     private Graphics desenhoDir;
 
@@ -109,30 +119,42 @@ public class MontarPainelInicial {
         btSalva = addAButton("Save", "botaoSalva", buttonPanel, false, controlePrograma);
         addAButton("END", "botaoFim", buttonPanel, true, controlePrograma);
 
-        // ADDING RADIO BUTTON PARA CONTROLE DA ACAO3
+        // CONFIGURANDO A INTERFACE DOS PARÂMETROS DO FILTRO GABOR
+        //IINICIALIZANDO LABELS
+        lbTheta = new JLabel("θ:");
+        lbSigma = new JLabel("σ:");
+        lbLambda = new JLabel("λ:");
+        lbGamma = new JLabel("γ:");
+        lbOffset = new JLabel("φ:");
+        
+        //INICIALIZANDO CAMPOS DE TEXTO
+        tfTheta = new JTextField("0");
+        tfSigma = new JTextField("1");
+        tfLambda = new JTextField("3");
+        tfGamma = new JTextField("0.5");
+        tfOffset = new JTextField("0");
+        
         controlePanelAcao3 = new JPanel();
         controlePanelAcao3.setBackground(Color.lightGray);
-        controlePanelAcao3.setMaximumSize(new Dimension(130, 60));
+        controlePanelAcao3.setMaximumSize(new Dimension(200, 150));
         outputPanelEsq.add(controlePanelAcao3);
 
-        btAcao31 = new JRadioButton("Acao 31", true);
-        btAcao32 = new JRadioButton("Acao 32", false);
-
-        btRdAcao3 = new ButtonGroup();
-        btRdAcao3.add(btAcao31);
-        btRdAcao3.add(btAcao32);
-
-        btAcao31.addActionListener(controlePrograma);
-        btAcao32.addActionListener(controlePrograma);
-
         acao3Panel = new JPanel();
-        acao3Panel.setPreferredSize(new Dimension(120, 55));
-        acao3Panel.setLayout(new GridLayout(2, 1));
+        acao3Panel.setPreferredSize(new Dimension(120, 130));
+        acao3Panel.setLayout(new GridLayout(5, 2));
 
-        acao3Panel.add(btAcao31);
-        acao3Panel.add(btAcao32);
+        acao3Panel.add(lbSigma);
+        acao3Panel.add(tfSigma);
+        acao3Panel.add(lbGamma);
+        acao3Panel.add(tfGamma);
+        acao3Panel.add(lbTheta);
+        acao3Panel.add(tfTheta);
+        acao3Panel.add(lbLambda);
+        acao3Panel.add(tfLambda);
+        acao3Panel.add(lbOffset);
+        acao3Panel.add(tfOffset);
 
-        acao3Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Acao3"));
+        acao3Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Filtro Gabor"));
 
         controlePanelAcao3.add(acao3Panel);
         controlePanelAcao3.setVisible(false);
@@ -143,39 +165,6 @@ public class MontarPainelInicial {
         controlePanelAcao1.setMaximumSize(new Dimension(130, 115));
         outputPanelEsq.add(controlePanelAcao1);
 
-        btAcao11 = new JRadioButton(" Acao 11 ", true);
-        btAcao12 = new JRadioButton(" Acao 12 ", false);
-        btAcao13 = new JRadioButton(" Acao 13 ", false);
-        btAcao14 = new JRadioButton(" Acao 14 ", false);
-        btAcao15 = new JRadioButton(" Acao 15 ", false);
-
-        btRdAcao1 = new ButtonGroup();
-        btRdAcao1.add(btAcao11);
-        btRdAcao1.add(btAcao12);
-        btRdAcao1.add(btAcao13);
-        btRdAcao1.add(btAcao14);
-        btRdAcao1.add(btAcao15);
-
-        btAcao11.addActionListener(controlePrograma);
-        btAcao12.addActionListener(controlePrograma);
-        btAcao13.addActionListener(controlePrograma);
-        btAcao14.addActionListener(controlePrograma);
-        btAcao15.addActionListener(controlePrograma);
-
-        acao1Panel = new JPanel();
-        acao1Panel.setPreferredSize(new Dimension(120, 110));
-        acao1Panel.setLayout(new GridLayout(5, 1));
-
-        acao1Panel.add(btAcao11);
-        acao1Panel.add(btAcao12);
-        acao1Panel.add(btAcao13);
-        acao1Panel.add(btAcao14);
-        acao1Panel.add(btAcao15);
-
-        acao1Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "ACAO 1"));
-
-        controlePanelAcao1.add(acao1Panel);
-        controlePanelAcao1.setVisible(false);
 
         // ADDING RADIO BUTTON PARA CONTROLE DA ACAO 2
         controlePanelAcao2 = new JPanel();

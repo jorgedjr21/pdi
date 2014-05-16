@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.JOptionPane;
 import VIEW.*;
 import MODEL.FiltroGabor;
+import java.awt.image.BufferedImage;
 
 public class ControlarAplicativo implements ActionListener {
 
@@ -69,6 +70,11 @@ public class ControlarAplicativo implements ActionListener {
         }
 
         if (comando.equals("botaoFiltroGabor")) {
+            if (pnCenario.getTipoVisualImage() == 2) {
+                BufferedImage img;
+                img = controleImagem.transformarMatriz2Buffer(imagemCinza, imagemCinza[0].length, imagemCinza.length);
+                controleImagem.mostrarImagemBuffer(img, desenhoCen);
+            }
             filtroGabor = new FiltroGabor(5, 3 * Math.PI / 4, 2, 2, 1, 0);
             imagemCinza = controleImagem.aplicarFiltroGabor(filtroGabor, imagemCinza);
             pnCenario.limpaPainelDir(desenhoDir);
@@ -76,18 +82,22 @@ public class ControlarAplicativo implements ActionListener {
             nLinImageAtual = imagemCinza[0].length;
             nColImageAtual = imagemCinza.length;
             imagemAtual = controleImagem.copiarImagem(imagemCinza, nLinImageAtual, nColImageAtual);
-
         }
 
         if (comando.equals("botaoRotacionar")) {
             float angulo = Float.parseFloat(JOptionPane.showInputDialog("Informe o Ângulo desejado:"));
-            //JOptionPane.showMessageDialog(null, String.valueOf(angulo));
+            if (pnCenario.getTipoVisualImage() == 2) {
+                BufferedImage img;
+                img = controleImagem.transformarMatriz2Buffer(imagemCinza, imagemCinza[0].length, imagemCinza.length);
+                controleImagem.mostrarImagemBuffer(img, desenhoCen);
+            }
             imagemCinza = controleImagem.rotacionarImagem(angulo);
             pnCenario.limpaPainelDir(desenhoDir);
             controleImagem.mostrarImagemMatriz(imagemCinza, imagemCinza[0].length, imagemCinza.length, desenhoDir);
             nLinImageAtual = imagemCinza[0].length;
             nColImageAtual = imagemCinza.length;
             imagemAtual = controleImagem.copiarImagem(imagemCinza, nLinImageAtual, nColImageAtual);
+
         }
 
         if (comando.equals("botaoAcao11")) {

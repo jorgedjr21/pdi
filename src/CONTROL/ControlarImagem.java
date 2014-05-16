@@ -245,7 +245,7 @@ public class ControlarImagem {
     }
 
     //*******************************************************************************************
-    private BufferedImage transformarMatriz2Buffer(char[][] imagemM, int nLin, int nCol) {
+    public BufferedImage transformarMatriz2Buffer(char[][] imagemM, int nLin, int nCol) {
         int x, y;
         char valorSaida;
         WritableRaster imagemRasterSaida;

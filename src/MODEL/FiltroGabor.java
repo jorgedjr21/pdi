@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package MODEL;
 
 /**
@@ -44,21 +41,21 @@ public class FiltroGabor {
         double sum = 0, s2 = 0;
         for (int x = 0; x < tamKernel; x++) {
             for (int y = 0; y < tamKernel; y++) {
-                System.out.printf("%f ", matrizConvolucao[x][y]);
+                //System.out.printf("%f ", matrizConvolucao[x][y]);
                 sum += matrizConvolucao[x][y];
             }
-            System.out.printf("\n");
+            //System.out.printf("\n");
         }
         System.out.println("");
         for (int x = 0; x < tamKernel; x++) {
             for (int y = 0; y < tamKernel; y++) {
                 matrizConvolucao[x][y] /= sum;
-                System.out.printf("%f ", matrizConvolucao[x][y]);
+                //System.out.printf("%f ", matrizConvolucao[x][y]);
 
                 s2 += matrizConvolucao[x][y];
             }
-            System.out.printf("\n");
+            //System.out.printf("\n");
         }
-        System.out.println("sum normalizada " + s2);
+        //System.out.println("sum normalizada " + s2);
     }
 }
