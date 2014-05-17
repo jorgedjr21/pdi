@@ -47,11 +47,13 @@ public class MontarPainelInicial {
     private JLabel lbLambda;
     private JLabel lbGamma;
     private JLabel lbOffset;
+    private JLabel lbAngulo;
     private JTextField tfTheta;
     private JTextField tfSigma;
     private JTextField tfGamma;
     private JTextField tfLambda;
     private JTextField tfOffset;
+    private JTextField tfAngulo;
     private Graphics desenhoCen;
     private Graphics desenhoDir;
 
@@ -113,34 +115,52 @@ public class MontarPainelInicial {
         // ADDING BUTTONS
         addAButton("New Image", "botaoImagem", buttonPanel, true, controlePrograma);
         btReset = addAButton("Reset", "botaoReset", buttonPanel, false, controlePrograma);
-        btAcao1 = addAButton("Rotacionar", "botaoRotacionar", buttonPanel, false, controlePrograma);
-        btAcao3 = addAButton("Aplicar Filtro Gabor", "botaoFiltroGabor", buttonPanel, false, controlePrograma);
-        btAcao4 = addAButton("Acao4", "botaoAcao4", buttonPanel, false, controlePrograma);
         btSalva = addAButton("Save", "botaoSalva", buttonPanel, false, controlePrograma);
         addAButton("END", "botaoFim", buttonPanel, true, controlePrograma);
 
-        // CONFIGURANDO A INTERFACE DOS PARÂMETROS DO FILTRO GABOR
+        // CONFIGURANDO A INTERFACE DOS PARÂMETROS DO FILTRO GABOR E DA ROTAÇÃO
+        //Configurando botão de aplicação do filtro
+        btAcao3 = new JButton("Aplicar Filtro");
+        btAcao3.setActionCommand("botaoFiltroGabor");
+        btAcao3.addActionListener(controlePrograma);
+
+
+        //Configurando botão de aplicação da rotação
+        btAcao1 = new JButton("Rotacionar");
+        btAcao1.setActionCommand("botaoRotacionar");
+        btAcao1.addActionListener(controlePrograma);
+
         //IINICIALIZANDO LABELS
         lbTheta = new JLabel("θ:");
         lbSigma = new JLabel("σ:");
         lbLambda = new JLabel("λ:");
         lbGamma = new JLabel("γ:");
         lbOffset = new JLabel("φ:");
-        
+        lbAngulo = new JLabel("Ângulo:");
+
+        //Adicionando tooltips
+        lbTheta.setToolTipText("Orientação do filtro em graus. Aceitável qualquer valor entre 0 e 360.");
+        lbSigma.setToolTipText("Desvio padrão do componente Gaussiano. Aceitável qualquer valor maior que zero e menor que o tamanho do kernel utilizado.");
+        lbLambda.setToolTipText("Comprimento de onda do componente cossenoidal do filtro. Especificado em pixels, aceitável qualquer valor maior que dois.");
+        lbGamma.setToolTipText("Relação de aspecto. Define o quão elíptica é a função. Aceitável qualquer valor maior que 0 e menor ou igual a 1.");
+        lbOffset.setToolTipText("Deslocamento da função cosseno. Zero por padrão, mas é aceitável qualquer valor.");
+        lbAngulo.setToolTipText("Ângulo, em graus, pelo qual a imagem será rotacionada utilizando interpolação pelo método do vizinho mais próximo.");
+
         //INICIALIZANDO CAMPOS DE TEXTO
         tfTheta = new JTextField("0");
         tfSigma = new JTextField("1");
         tfLambda = new JTextField("3");
         tfGamma = new JTextField("0.5");
         tfOffset = new JTextField("0");
-        
+        tfAngulo = new JTextField("90");
+
         controlePanelAcao3 = new JPanel();
         controlePanelAcao3.setBackground(Color.lightGray);
-        controlePanelAcao3.setMaximumSize(new Dimension(200, 150));
+        controlePanelAcao3.setMaximumSize(new Dimension(200, 200));
         outputPanelEsq.add(controlePanelAcao3);
 
         acao3Panel = new JPanel();
-        acao3Panel.setPreferredSize(new Dimension(120, 130));
+        acao3Panel.setPreferredSize(new Dimension(120, 150));
         acao3Panel.setLayout(new GridLayout(5, 2));
 
         acao3Panel.add(lbSigma);
@@ -157,93 +177,24 @@ public class MontarPainelInicial {
         acao3Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Filtro Gabor"));
 
         controlePanelAcao3.add(acao3Panel);
+        controlePanelAcao3.add(btAcao3);
         controlePanelAcao3.setVisible(false);
 
-        // ADDING RADIO BUTTON PARA CONTROLE DA ACAO 1
+        // CONFIGURANDO ÁREA DE CONTROLE DA ROTAÇÃO
         controlePanelAcao1 = new JPanel();
         controlePanelAcao1.setBackground(Color.lightGray);
-        controlePanelAcao1.setMaximumSize(new Dimension(130, 115));
+        controlePanelAcao1.setMaximumSize(new Dimension(130, 110));
+        controlePanelAcao1.setVisible(false);
+        acao1Panel = new JPanel();
+        acao1Panel.setPreferredSize(new Dimension(120, 45));
+        acao1Panel.setLayout(new GridLayout(1, 2));
+
+        acao1Panel.add(lbAngulo);
+        acao1Panel.add(tfAngulo);
+        acao1Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rotação"));
+        controlePanelAcao1.add(acao1Panel);
+        controlePanelAcao1.add(btAcao1);
         outputPanelEsq.add(controlePanelAcao1);
-
-
-        // ADDING RADIO BUTTON PARA CONTROLE DA ACAO 2
-        controlePanelAcao2 = new JPanel();
-        controlePanelAcao2.setBackground(Color.lightGray);
-        controlePanelAcao2.setMaximumSize(new Dimension(130, 135));
-        outputPanelEsq.add(controlePanelAcao2);
-
-        btAcao21 = new JRadioButton(" Acao21 ", true);
-        btAcao22 = new JRadioButton(" Acao22 ", false);
-        btAcao23 = new JRadioButton(" Acao23 ", false);
-        btAcao24 = new JRadioButton(" Acao24 ", false);
-        btAcao25 = new JRadioButton(" Acao25 ", false);
-        btAcao26 = new JRadioButton(" Acao26 ", false);
-
-        btRdAcao2 = new ButtonGroup();
-        btRdAcao2.add(btAcao21);
-        btRdAcao2.add(btAcao22);
-        btRdAcao2.add(btAcao23);
-        btRdAcao2.add(btAcao24);
-        btRdAcao2.add(btAcao25);
-        btRdAcao2.add(btAcao26);
-
-        btAcao21.addActionListener(controlePrograma);
-        btAcao22.addActionListener(controlePrograma);
-        btAcao23.addActionListener(controlePrograma);
-        btAcao24.addActionListener(controlePrograma);
-        btAcao25.addActionListener(controlePrograma);
-        btAcao26.addActionListener(controlePrograma);
-
-        btAcao21.setActionCommand("botaoAcao21");
-        btAcao22.setActionCommand("botaoAcao22");
-        btAcao23.setActionCommand("botaoAcao23");
-        btAcao24.setActionCommand("botaoAcao24");
-        btAcao25.setActionCommand("botaoAcao25");
-        btAcao26.setActionCommand("botaoAcao26");
-
-        acao2Panel = new JPanel();
-        acao2Panel.setPreferredSize(new Dimension(120, 130));
-        acao2Panel.setLayout(new GridLayout(6, 1));
-
-        acao2Panel.add(btAcao21);
-        acao2Panel.add(btAcao22);
-        acao2Panel.add(btAcao23);
-        acao2Panel.add(btAcao24);
-        acao2Panel.add(btAcao25);
-        acao2Panel.add(btAcao26);
-
-        acao2Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "ACAO 2"));
-
-        controlePanelAcao2.add(acao2Panel);
-        controlePanelAcao2.setVisible(false);
-
-        // ADDING RADIO BUTTON PARA CONTROLE DO TIPO DA ACAO 4
-        controlePanelAcao4 = new JPanel();
-        controlePanelAcao4.setBackground(Color.lightGray);
-        controlePanelAcao4.setMaximumSize(new Dimension(130, 60));
-        outputPanelEsq.add(controlePanelAcao4);
-
-        btAcao41 = new JRadioButton("  Acao 41 ", true);
-        btAcao42 = new JRadioButton("  Acao 42 ", false);
-
-        btRdAcao4 = new ButtonGroup();
-        btRdAcao4.add(btAcao41);
-        btRdAcao4.add(btAcao42);
-
-        btAcao41.addActionListener(controlePrograma);
-        btAcao42.addActionListener(controlePrograma);
-
-        acao4Panel = new JPanel();
-        acao4Panel.setPreferredSize(new Dimension(120, 55));
-        acao4Panel.setLayout(new GridLayout(2, 1));
-
-        acao4Panel.add(btAcao41);
-        acao4Panel.add(btAcao42);
-
-        acao4Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "ACAO 4"));
-
-        controlePanelAcao4.add(acao4Panel);
-        controlePanelAcao4.setVisible(false);
 
         // ADDING RADIO BUTTON PARA CONTROLE DA VISUALIZACAO DAS IMAGENS
         controlePanelVisualImagens = new JPanel();
@@ -326,12 +277,9 @@ public class MontarPainelInicial {
         btAcao1.setEnabled(true);
         btSalva.setEnabled(true);
         btReset.setEnabled(true);
-        btAcao4.setEnabled(true);
         controlePanelAcao3.setVisible(true);
         controlePanelAcao1.setVisible(true);
-        controlePanelAcao2.setVisible(true);
         controlePanelVisualImagens.setVisible(true);
-        controlePanelAcao4.setVisible(true);
     }
 
     //*******************************************************************************************
@@ -426,10 +374,31 @@ public class MontarPainelInicial {
 
     //******************************************************************************************
     public void resetaSistema() {
-        btAcao11.setSelected(true);
-        btAcao21.setSelected(true);
-        btAcao31.setSelected(true);
         btVisualNewImg.setSelected(true);
     }
     //******************************************************************************************
+
+    public float getAngulo() {
+        return Float.parseFloat(tfAngulo.getText());
+    }
+
+    public float getTheta() {
+        return (float) (Float.parseFloat(tfTheta.getText()) * Math.PI / 180);
+    }
+
+    public float getSigma() {
+        return Float.parseFloat(tfSigma.getText());
+    }
+
+    public float getGamma() {
+        return Float.parseFloat(tfGamma.getText());
+    }
+
+    public float getLambda() {
+        return Float.parseFloat(tfLambda.getText());
+    }
+
+    public float getOffset() {
+        return Float.parseFloat(tfOffset.getText());
+    }
 }

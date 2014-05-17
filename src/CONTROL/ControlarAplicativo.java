@@ -71,11 +71,12 @@ public class ControlarAplicativo implements ActionListener {
 
         if (comando.equals("botaoFiltroGabor")) {
             if (pnCenario.getTipoVisualImage() == 2) {
+                pnCenario.limpaPainelCen(desenhoCen);
                 BufferedImage img;
                 img = controleImagem.transformarMatriz2Buffer(imagemCinza, imagemCinza[0].length, imagemCinza.length);
                 controleImagem.mostrarImagemBuffer(img, desenhoCen);
             }
-            filtroGabor = new FiltroGabor(5, 3 * Math.PI / 4, 2, 2, 1, 0);
+            filtroGabor = new FiltroGabor(5, pnCenario.getTheta(), pnCenario.getSigma(), pnCenario.getLambda(), pnCenario.getGamma(), pnCenario.getOffset());
             imagemCinza = controleImagem.aplicarFiltroGabor(filtroGabor, imagemCinza);
             pnCenario.limpaPainelDir(desenhoDir);
             controleImagem.mostrarImagemMatriz(imagemCinza, imagemCinza[0].length, imagemCinza.length, desenhoDir);
@@ -85,8 +86,9 @@ public class ControlarAplicativo implements ActionListener {
         }
 
         if (comando.equals("botaoRotacionar")) {
-            float angulo = Float.parseFloat(JOptionPane.showInputDialog("Informe o Ângulo desejado:"));
+            float angulo = pnCenario.getAngulo();
             if (pnCenario.getTipoVisualImage() == 2) {
+                pnCenario.limpaPainelCen(desenhoCen);
                 BufferedImage img;
                 img = controleImagem.transformarMatriz2Buffer(imagemCinza, imagemCinza[0].length, imagemCinza.length);
                 controleImagem.mostrarImagemBuffer(img, desenhoCen);
