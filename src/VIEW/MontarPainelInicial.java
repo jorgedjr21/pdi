@@ -114,22 +114,13 @@ public class MontarPainelInicial {
 
         // ADDING BUTTONS
         addAButton("New Image", "botaoImagem", buttonPanel, true, controlePrograma);
+        btAcao1 = addAButton("Rotacionar", "botaoRotacionar", buttonPanel, false, controlePrograma);
+        btAcao3 = addAButton("Aplicar Filtro de Gabor", "botaoFiltroGabor", buttonPanel, false, controlePrograma);
         btReset = addAButton("Reset", "botaoReset", buttonPanel, false, controlePrograma);
         btSalva = addAButton("Save", "botaoSalva", buttonPanel, false, controlePrograma);
         addAButton("END", "botaoFim", buttonPanel, true, controlePrograma);
 
         // CONFIGURANDO A INTERFACE DOS PARÂMETROS DO FILTRO GABOR E DA ROTAÇÃO
-        //Configurando botão de aplicação do filtro
-        btAcao3 = new JButton("Aplicar Filtro");
-        btAcao3.setActionCommand("botaoFiltroGabor");
-        btAcao3.addActionListener(controlePrograma);
-
-
-        //Configurando botão de aplicação da rotação
-        btAcao1 = new JButton("Rotacionar");
-        btAcao1.setActionCommand("botaoRotacionar");
-        btAcao1.addActionListener(controlePrograma);
-
         //IINICIALIZANDO LABELS
         lbTheta = new JLabel("θ:");
         lbSigma = new JLabel("σ:");
@@ -156,7 +147,7 @@ public class MontarPainelInicial {
 
         controlePanelAcao3 = new JPanel();
         controlePanelAcao3.setBackground(Color.lightGray);
-        controlePanelAcao3.setMaximumSize(new Dimension(200, 200));
+        controlePanelAcao3.setMaximumSize(new Dimension(200, 160));
         outputPanelEsq.add(controlePanelAcao3);
 
         acao3Panel = new JPanel();
@@ -177,13 +168,12 @@ public class MontarPainelInicial {
         acao3Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Filtro Gabor"));
 
         controlePanelAcao3.add(acao3Panel);
-        controlePanelAcao3.add(btAcao3);
         controlePanelAcao3.setVisible(false);
 
         // CONFIGURANDO ÁREA DE CONTROLE DA ROTAÇÃO
         controlePanelAcao1 = new JPanel();
         controlePanelAcao1.setBackground(Color.lightGray);
-        controlePanelAcao1.setMaximumSize(new Dimension(130, 110));
+        controlePanelAcao1.setMaximumSize(new Dimension(130, 60));
         controlePanelAcao1.setVisible(false);
         acao1Panel = new JPanel();
         acao1Panel.setPreferredSize(new Dimension(120, 45));
@@ -193,7 +183,6 @@ public class MontarPainelInicial {
         acao1Panel.add(tfAngulo);
         acao1Panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Rotação"));
         controlePanelAcao1.add(acao1Panel);
-        controlePanelAcao1.add(btAcao1);
         outputPanelEsq.add(controlePanelAcao1);
 
         // ADDING RADIO BUTTON PARA CONTROLE DA VISUALIZACAO DAS IMAGENS
@@ -273,6 +262,7 @@ public class MontarPainelInicial {
 
     //*******************************************************************************************
     public void mudarBotoes() {
+        System.out.println("estou no mudar botoes!");
         btAcao3.setEnabled(true);
         btAcao1.setEnabled(true);
         btSalva.setEnabled(true);

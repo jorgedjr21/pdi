@@ -1,9 +1,5 @@
 package MODEL;
 
-/**
- *
- * @author marciovbarbosa
- */
 public class FiltroGabor {
 
     private int tamKernel;
