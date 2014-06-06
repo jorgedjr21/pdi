@@ -1,4 +1,4 @@
-package MODEL;
+package pacoteBase08.MODEL;
 
 public class FiltroGabor {
 

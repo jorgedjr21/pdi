@@ -1,11 +1,11 @@
-package CONTROL;
+package pacoteBase08.CONTROL;
 
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
 import static java.lang.StrictMath.*;
 import javax.imageio.ImageIO;
-import MODEL.FiltroGabor;
+import pacoteBase08.MODEL.FiltroGabor;
 
 public class ControlarImagem {
 

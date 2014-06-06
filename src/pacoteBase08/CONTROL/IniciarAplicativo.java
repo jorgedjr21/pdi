@@ -6,9 +6,9 @@
  * ORIENTADOS PELO PROF. EDISON O JESUS
      
  */
-package CONTROL;
+package pacoteBase08.CONTROL;
 
-import CONTROL.ControlarAplicativo;
+import pacoteBase08.CONTROL.ControlarAplicativo;
 
 public class IniciarAplicativo {
 

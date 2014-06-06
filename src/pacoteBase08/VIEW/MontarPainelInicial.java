@@ -1,9 +1,9 @@
-package VIEW;
+package pacoteBase08.VIEW;
 
 import java.awt.*;
 import java.io.File;
 import javax.swing.*;
-import CONTROL.ControlarAplicativo;
+import pacoteBase08.CONTROL.ControlarAplicativo;
 
 public class MontarPainelInicial {
 

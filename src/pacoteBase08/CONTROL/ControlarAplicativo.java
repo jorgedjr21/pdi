@@ -1,10 +1,10 @@
-package CONTROL;
+package pacoteBase08.CONTROL;
 
+import pacoteBase08.VIEW.MontarPainelInicial;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JOptionPane;
-import VIEW.*;
-import MODEL.FiltroGabor;
+import pacoteBase08.MODEL.FiltroGabor;
 import java.awt.image.BufferedImage;
 
 public class ControlarAplicativo implements ActionListener {
